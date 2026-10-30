@@ -4,15 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pearl Street Boba</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --background: #FFF8F0;
+      --text: #352A3D;
+      --primary: #4F8A68;
+      --secondary: #F3B7C8;
+      --accent: #C98B58;
+    }
+
     body {
       margin: 0;
+      max-width: 72rem;
+      margin-inline: auto;
       padding: 1.5rem;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: "Nunito", Arial, sans-serif;
       font-size: 1rem;
-      line-height: 1.5;
-      color: #222;
-      background: #f7f7f7;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--background);
     }
 
     header {
@@ -22,12 +35,13 @@
       gap: 1rem;
       margin-bottom: 1.5rem;
       padding-bottom: 0.75rem;
-      border-bottom: 1px solid #d8d8d8;
+      border-bottom: 1px solid var(--accent);
     }
 
     .site-name {
-      color: #26734d;
-      font-weight: bold;
+      color: var(--primary);
+      font-family: "Pacifico", cursive;
+      font-weight: 400;
       text-decoration: none;
     }
 
@@ -38,14 +52,31 @@
     }
 
     nav a {
-      color: #222;
+      color: var(--text);
       font-size: 0.9rem;
+      font-weight: 700;
       text-decoration: none;
     }
 
     h1 {
       margin: 0 0 0.35rem;
-      font-size: 2rem;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      line-height: 1.2;
+      font-family: "Pacifico", cursive;
+      font-weight: 400;
+    }
+
+    h2,
+    h3 {
+      font-family: "Pacifico", cursive;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    h2 {
+      padding-bottom: 0.3rem;
+      color: var(--primary);
+      border-bottom: 2px solid var(--accent);
     }
 
     .hero {
@@ -55,8 +86,20 @@
       align-items: center;
       margin-bottom: 2rem;
       padding: 2rem;
-      background: #e8f4ed;
+      background: var(--secondary);
       border-radius: 0.75rem;
+      animation: hero-in 500ms ease-out both;
+    }
+
+    @keyframes hero-in {
+      from {
+        opacity: 0;
+        transform: translateY(0.5rem);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .hero img {
@@ -67,20 +110,38 @@
     }
 
     .hero h1 {
-      font-size: 2.4rem;
+      max-width: 12ch;
     }
 
     .hero p {
+      font-size: 1.15rem;
       margin-bottom: 1rem;
     }
 
     .hero a {
       display: inline-block;
-      padding: 0.65rem 1rem;
-      color: #fff;
-      background: #26734d;
+      padding: 0.75rem 1.15rem;
+      color: var(--background);
+      background: var(--primary);
+      font-family: inherit;
+      font-weight: 700;
       border-radius: 0.35rem;
       text-decoration: none;
+      transition: background-color 160ms ease, transform 160ms ease;
+    }
+
+    .intro-title {
+      margin-top: 0;
+      border-bottom: 0;
+      color: var(--text);
+      font-family: "Nunito", Arial, sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .hero a:hover {
+      background: var(--text);
+      transform: translateY(-2px);
     }
 
     .menu-gallery {
@@ -96,12 +157,43 @@
       gap: 1.5rem;
     }
 
+    .list-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+      align-items: stretch;
+      margin-bottom: 1.25rem;
+    }
+
+    .list-card {
+      padding: 1rem;
+      background: var(--background);
+      border: 1px solid var(--accent);
+      border-radius: 0.5rem;
+    }
+
+    .list-card h3 {
+      margin: 0 0 0.65rem;
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+
+    .list-card ul {
+      margin-bottom: 0;
+    }
+
     .menu-gallery .card {
       overflow: hidden;
       margin: 0;
-      background: #fff;
-      border: 1px solid #e2e2e2;
+      background: var(--background);
+      border: 1px solid var(--accent);
       border-radius: 0.5rem;
+      transition: box-shadow 160ms ease, transform 160ms ease;
+    }
+
+    .menu-gallery .card:hover {
+      box-shadow: 0 0.4rem 1rem rgb(53 42 61 / 0.14);
+      transform: translateY(-3px);
     }
 
     .menu-gallery img {
@@ -120,6 +212,17 @@
       font-size: 1rem;
     }
 
+    .badge {
+      display: inline-block;
+      margin-bottom: 0.4rem;
+      padding: 0.15rem 0.45rem;
+      color: var(--text);
+      background: var(--accent);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
     .card p {
       margin: 0;
       font-size: 0.9rem;
@@ -128,7 +231,8 @@
     @media (max-width: 42rem) {
       .hero,
       .menu-gallery,
-      .info-row {
+      .info-row,
+      .list-row {
         grid-template-columns: 1fr 1fr;
       }
 
@@ -151,7 +255,8 @@
       }
 
       .menu-gallery,
-      .info-row {
+      .info-row,
+      .list-row {
         grid-template-columns: 1fr;
       }
     }
@@ -178,13 +283,24 @@
     footer {
       margin-top: 2rem;
       padding-top: 1.25rem;
-      border-top: 1px solid #d8d8d8;
-      color: #555;
-      background: #efefef;
+      border-top: 1px solid var(--accent);
+      color: var(--background);
+      background: var(--text);
     }
 
     footer p {
       margin: 0 0 0.35rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero {
+        animation: none;
+      }
+
+      .hero a,
+      .menu-gallery .card {
+        transition: none;
+      }
     }
   </style>
 </head>
@@ -209,7 +325,7 @@
     <img src="images/hero.jpg" alt="Milk tea with boba held in front of spring blossoms" />
   </section>
 
-  <h1>Pearl Street Boba</h1>
+  <h2 class="intro-title">Pearl Street Boba</h2>
   <p>Fresh boba tea near campus.</p>
   <p>Owner: Kai</p>
 
@@ -221,6 +337,7 @@
     <article class="card">
       <img src="images/brown-sugar-cup.jpg" alt="Brown sugar boba drink" />
       <div class="card-body">
+        <span class="badge">Popular</span>
         <h3>Brown Sugar Favorite</h3>
         <p>Rich brown sugar flavor with chewy classic pearls.</p>
       </div>
@@ -228,6 +345,7 @@
     <article class="card">
       <img src="images/strawberry.jpg" alt="Strawberry fruit tea" />
       <div class="card-body">
+        <span class="badge">Fresh pick</span>
         <h3>Strawberry Fruit Tea</h3>
         <p>Bright, refreshing fruit tea with a sweet berry finish.</p>
       </div>
@@ -261,8 +379,10 @@
       </div>
     </article>
   </div>
-  <p>Drinks:</p>
-  <ul>
+  <div class="list-row">
+    <section class="list-card">
+      <h3>Drinks</h3>
+      <ul>
     <li>Classic Milk Tea with Boba - $5.50</li>
     <li>Brown Sugar Milk Tea - $6.00</li>
     <li>Taro Milk Tea - $6.00</li>
@@ -273,16 +393,20 @@
     <li>Honey Lemon Green Tea - $5.25</li>
     <li>Wintermelon Tea - $5.00</li>
     <li>Oolong Milk Tea - $5.75</li>
-  </ul>
+      </ul>
+    </section>
 
-  <p>Toppings:</p>
-  <ul>
+    <section class="list-card">
+      <h3>Toppings</h3>
+      <ul>
     <li>Classic boba pearls - +$0.75</li>
     <li>Brown sugar pearls - +$1.00</li>
     <li>Lychee jelly - +$0.75</li>
     <li>Aloe jelly - +$0.75</li>
     <li>Pudding - +$0.75</li>
-  </ul>
+      </ul>
+    </section>
+  </div>
 
   <p>Sweetness: 0%, 30%, 50%, 70%, or 100%</p>
   <p>Ice: Extra ice, regular ice, or less ice</p>
